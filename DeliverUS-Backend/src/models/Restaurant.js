@@ -68,6 +68,7 @@ const loadModel = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       defaultValue: new Date()
     },
+    heroImage: DataTypes.STRING,
     updatedAt: {
       allowNull: false,
       type: DataTypes.DATE,
@@ -86,6 +87,12 @@ const loadModel = (sequelize, DataTypes) => {
         'closed',
         'temporarily closed'
       ]
+    },
+    averageServiceMinutes: {
+      type: DataTypes.VIRTUAL,
+      get () {
+        return Number(this.getAverageServiceTime())
+      }
     }
 
   }, {
